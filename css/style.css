@@ -1,0 +1,144 @@
+/* définition police */
+@media screen and (max-width: 1920px) {
+  
+@font-face {
+  font-family: AVICENNA;
+  src: local("Helvetica Neue Bold"),
+       local("HelveticaNeue-Bold"),
+       url(../style/AVICENNA.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: theboldfont;
+  src: local("theboldfont"),
+       local("theboldfont"),
+       url(../style/theboldfont.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Nesatho;
+  src: local("Nesatho"),
+       local("Nesatho"),
+       url(../style/Nesatho.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Audi;
+  src: local("Audi"),
+       local("Audi"),
+       url(../style/audi.otf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: tommy;
+  src: local("tommy"),
+       local("tommy"),
+       url(../style/tommy.otf);
+  font-weight: bold;
+}
+
+.title-slider {
+	color:white;
+	position: relative;
+  margin-top: 191px;
+  margin-left: 70px;
+}
+
+.texte-slider {
+	color:white;
+	position: relative;
+  margin-left: 70px;
+}
+
+.rs3-texte-index {
+  color:black;
+  position: absolute;
+  margin-top: -9%;
+  margin-left: 54%;
+}
+
+.rs3-title-index {
+  color:black;
+  position: absolute;
+  margin-left: 54%;
+  margin-top: -15%;
+}
+
+.ttrs-texte-index {
+  color:black;
+  position: absolute;
+  margin-top: -10%;
+  margin-left: 17%;
+  width: 35%;
+}
+
+.ttrs-title-index {
+  color:black;
+  position: absolute;
+  margin-left: 17%;
+  margin-top: -15%;
+}
+
+.title-vente-index{
+  color: black;
+}
+
+.texte-vente-index{
+  color: black;
+}
+
+.title-partenaire{
+  color: black;
+  margin-left: 43%;
+  top:105%;
+  position: absolute;
+}
+
+.texte-partenaire{
+  color: black;
+  margin-left: 34%;
+  top:114%;
+  position: absolute;
+}
+}
+
+@media screen and (max-width: 520px) {
+
+  .rs3-texte-index {
+  color:black;
+  position: absolute;
+  margin-top: -54%;
+  margin-left: 54%;
+}
+
+.rs3-title-index {
+  color:black;
+  position: absolute;
+  margin-left: 54%;
+  margin-top: -78%;
+}
+
+  .ttrs-texte-index {
+  color:black;
+  position: absolute;
+  margin-top: -54%;
+  margin-left: 54%;
+}
+
+.ttrs-title-index {
+  color:black;
+  position: absolute;
+  margin-left: 54%;
+  margin-top: -78%;
+}
+
+.footer-texte{
+
+  color: white;
+}
+
+}
