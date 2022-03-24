@@ -8,14 +8,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type Utilisateurs struct {
-	Id_utilisateurs int
-	Nom             string
-	Pseudo          string
-	Prenom          string
-	Adresse_mail    string
-}
-
 func main() {
 
 	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/forum")
