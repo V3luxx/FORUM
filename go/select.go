@@ -11,6 +11,7 @@ import (
 type Utilisateurs struct {
 	Id_utilisateurs int
 	Nom             string
+	Pseudo          string
 	Prenom          string
 	Adresse_mail    string
 }
@@ -25,6 +26,7 @@ func main() {
 	}
 
 	res, err := db.Query("SELECT * FROM utilisateurs;")
+	res, err := db.Query("INSERT INTO ")
 
 	defer res.Close()
 
@@ -35,7 +37,7 @@ func main() {
 	for res.Next() {
 
 		var user Utilisateurs
-		err := res.Scan(&user.Id_utilisateurs, &user.Nom, &user.Prenom, &user.Adresse_mail)
+		err := res.Scan(&user.Id_utilisateurs, &user.Nom, &user.Pseudo, &user.Prenom, &user.Adresse_mail)
 
 		if err != nil {
 			log.Fatal(err)
