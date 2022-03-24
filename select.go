@@ -8,22 +8,23 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type City struct {
-	Id         int
-	Name       string
-	Population int
+type Utilisateurs struct {
+	Id_utilisateurs int
+	Nom             string
+	Prenom          string
+	Adresse_mail    string
 }
 
 func main() {
 
-	db, err := sql.Open("mysql", "root:tcp(127.0.0.1:3306)/testdb")
+	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/forum")
 	defer db.Close()
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	res, err := db.Query("SELECT * FROM cities")
+	res, err := db.Query("SELECT * FROM utilisateurs;")
 
 	defer res.Close()
 
@@ -33,13 +34,13 @@ func main() {
 
 	for res.Next() {
 
-		var city City
-		err := res.Scan(&city.Id, &city.Name, &city.Population)
+		var user Utilisateurs
+		err := res.Scan(&user.Id_utilisateurs, &user.Nom, &user.Prenom, &user.Adresse_mail)
 
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		fmt.Printf("%v\n", city)
+		fmt.Printf("%v\n", user)
 	}
 }
