@@ -1,7 +1,6 @@
-package main 
+package main
 
-func Connection(){
-	for i = 0; i < len(name) {
-		if 
-	}
+func main() {
+	u1 := Utilisateurs{}
+	println(u1.Id_utilisateurs)
 }
