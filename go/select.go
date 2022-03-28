@@ -4,9 +4,17 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	
+
 	_ "github.com/go-sql-driver/mysql"
 )
+
+type Utilisateurs struct {
+	Id_utilisateurs int
+	Nom             string
+	Prenom          string
+	Adresse_mail    string
+	Pseudo          string
+}
 
 func maine() {
 
