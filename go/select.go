@@ -18,23 +18,22 @@ func main() {
 	}
 
 	res, err := db.Query("SELECT * FROM utilisateurs;")
-	res, err := db.Query("INSERT INTO ")
 
 	defer res.Close()
 
 	if err != nil {
 		log.Fatal(err)
-	}
 
-	for res.Next() {
+		for res.Next() {
 
-		var user Utilisateurs
-		err := res.Scan(&user.Id_utilisateurs, &user.Nom, &user.Pseudo, &user.Prenom, &user.Adresse_mail)
+			var user Utilisateurs
+			err := res.Scan(&user.Id_utilisateurs, &user.Nom, &user.Pseudo, &user.Prenom, &user.Adresse_mail)
 
-		if err != nil {
-			log.Fatal(err)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			fmt.Printf("%v\n", user)
 		}
-
-		fmt.Printf("%v\n", user)
 	}
 }

@@ -22,13 +22,13 @@ type Adresses struct {
 	Code_postal string
 }
 
-type services struct {
+type Services struct {
 	Logs    string
 	Adress  string
 	Id_logs int
 }
 
-type gestion struct {
+type Sestion struct {
 	Admin_id   int
 	Admin_name string
 	Modo_name  string
