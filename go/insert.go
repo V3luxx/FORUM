@@ -13,10 +13,11 @@ func Insert() []Utilisateurs {
 
 	if err != nil {
 		log.Fatal(err)
-		defer db.Close()
 	}
+	defer db.Close()
+
 	var user []Utilisateurs
-	res, err := db.Query("INSERT INTO Utilisateurs Values(", )
+	res, err := db.Query("INSERT INTO Utilisateurs Values(")
 	if err != nil {
 		log.Fatal(err)
 	}
