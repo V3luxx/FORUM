@@ -2,10 +2,11 @@ package main
 
 type Utilisateurs struct {
 	Id_utilisateurs int
+	Pseudo          string
 	Nom             string
 	Prenom          string
 	Adresse_mail    string
-	Pseudo          string
+	Mot_de_passe    string
 }
 
 type Stock_forum struct {
@@ -28,7 +29,7 @@ type Services struct {
 	Id_logs int
 }
 
-type Sestion struct {
+type Gestion struct {
 	Admin_id   int
 	Admin_name string
 	Modo_name  string

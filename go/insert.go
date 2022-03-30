@@ -7,7 +7,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func Selector() []Utilisateurs {
+func Insert() []Utilisateurs {
 
 	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/forum")
 
@@ -16,7 +16,7 @@ func Selector() []Utilisateurs {
 		defer db.Close()
 	}
 	var user []Utilisateurs
-	res, err := db.Query("SELECT * FROM utilisateurs")
+	res, err := db.Query("INSERT INTO Utilisateurs Values(", )
 	if err != nil {
 		log.Fatal(err)
 	}
