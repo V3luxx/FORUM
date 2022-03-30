@@ -1,15 +1,16 @@
 package main
 
-import(
+import (
 	"net/http"
 )
 
-func main() {
-	u1 := Utilisateurs{}
-	
-	println(u1.Id_utilisateurs)
+var u1 []Utilisateurs
 
+func main() {
+	u1 = Selector()
+	for _, test := range u1 {
+		println(test.Id_utilisateurs)
+	}
+	println("end")
 	http.ListenAndServe("localhost:8080", nil)
 }
-
-	

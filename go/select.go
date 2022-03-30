@@ -2,39 +2,35 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
-
-
-func Selector() {
+func Selector() []Utilisateurs {
 
 	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/forum")
-	defer db.Close()
 
+	if err != nil {
+		log.Fatal(err)
+		defer db.Close()
+	}
+	var user []Utilisateurs
+	res, err := db.Query("SELECT * FROM utilisateurs")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	res, err := db.Query("SELECT * FROM utilisateurs;")
+	for res.Next() {
+		var oneUser Utilisateurs
+		err := res.Scan(&oneUser.Id_utilisateurs, &oneUser.Nom, &oneUser.Pseudo, &oneUser.Prenom, &oneUser.Adresse_mail, &oneUser.Mot_de_passe)
 
-	defer res.Close()
-
-	if err != nil {
-		log.Fatal(err)
-
-		for res.Next() {
-
-			var user Utilisateurs
-			err := res.Scan(&user.Id_utilisateurs, &user.Nom, &user.Pseudo, &user.Prenom, &user.Adresse_mail)
-
-			if err != nil {
-				log.Fatal(err)
-			}
-
-			fmt.Printf("%v\n", user)
+		if err != nil {
+			log.Fatal(err)
 		}
+		user = append(user, oneUser)
+		/* fmt.Printf("%v\n", u) */
 	}
+	defer res.Close()
+	return user
 }
