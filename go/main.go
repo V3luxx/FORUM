@@ -11,6 +11,6 @@ func main() {
 	for _, test := range u1 {
 		println(test.Id_utilisateurs)
 	}
-	println("end")
+	println("test")
 	http.ListenAndServe("localhost:8080", nil)
 }
