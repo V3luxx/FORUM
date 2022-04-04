@@ -1,14 +1,14 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
 )
-
-var u1 []Utilisateurs
 
 var temp *template.Template
 
@@ -21,16 +21,10 @@ var temp *template.Template
 
 func main() {
 	var errT error
-	temp, errT = template.ParseGlob("forum/*.html")
+	temp, errT = template.ParseGlob("./*.html")
 	if errT != nil {
 		println(errT)
 	}
-
-	u1 = Selector()
-	for _, test := range u1 {
-		println(test.Id_utilisateurs)
-	}
-	println("test")
 	http.HandleFunc("/", index)
 	http.HandleFunc("/process", processor)
 	http.ListenAndServe("localhost:8080", nil)
@@ -64,6 +58,13 @@ func processor(w http.ResponseWriter, r *http.Request) {
 		password:   fpassword,
 	}
 
+	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/forum")
+
+	if err != nil {
+		log.Fatal(err)
+		defer db.Close()
+	}
+
 	result, err := db.Exec("INSERT INTO users (pseudo, nom, prenom, adresse_mail, mot_de_passe) VALUES (?, ?, ?, ?, ?, ?, ?)", d.pseudo, d.secondname, d.prenom, d.mail, d.password)
 	if err != nil {
 		fmt.Errorf("addUser: %v", err)
@@ -77,5 +78,6 @@ func processor(w http.ResponseWriter, r *http.Request) {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	temp.ExecuteTemplate(w, "register.html", nil)
+	fmt.Println("fonctionnel")
+	temp.ExecuteTemplate(w, "templates/register.html", nil)
 }
