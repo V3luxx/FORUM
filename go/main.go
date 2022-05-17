@@ -25,7 +25,7 @@ func main() {
 	if errT != nil {
 		println(errT)
 	}
-	http.HandleFunc("/", index)
+	http.HandleFunc("./", index)
 	http.HandleFunc("/process", processor)
 	http.ListenAndServe("localhost:8080", nil)
 
@@ -65,7 +65,8 @@ func processor(w http.ResponseWriter, r *http.Request) {
 		defer db.Close()
 	}
 
-	result, err := db.Exec("INSERT INTO users (pseudo, nom, prenom, adresse_mail, mot_de_passe) VALUES (?, ?, ?, ?, ?, ?, ?)", d.pseudo, d.secondname, d.prenom, d.mail, d.password)
+	result, err := db.Exec("INSERT INTO users (pseudo, nom, prenom, adresse_mail, mot_de_passe) VALUES (?, ?, ?, ?, ?, ?, ?)", &d.pseudo, &d.secondname, &d.prenom, &d.mail, &d.password)
+	Selector()
 	if err != nil {
 		fmt.Errorf("addUser: %v", err)
 	}
@@ -73,11 +74,9 @@ func processor(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Errorf("addUser: %v", err, id)
 	}
-
-	temp.ExecuteTemplate(w, "processor.html", d)
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("fonctionnel")
-	temp.ExecuteTemplate(w, "templates/register.html", nil)
+	temp.ExecuteTemplate(w, "./register.html", nil)
 }
