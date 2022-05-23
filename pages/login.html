@@ -1,3 +1,4 @@
+{{define "login"}}
 <!DOCTYPE html> 
 <html lang="fr">
 
@@ -7,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JVF - Connexion</title>
-    <meta name="description" content="JVF est un forum de jeux vidéo francais"/>
     <link href="../css/form.css" rel="stylesheet">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="https//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -20,23 +20,24 @@
     
         <!-- Icon -->
         <div class="fadeIn first">
-          <img src="../img/logoforum.png" id="icon" alt="User Icon" href="../index.html"/>
+          <img src="/static/img/logoforum.png" id="icon" alt="User Icon" href="index"/>
           <h2>Connexion</h2>
         </div>
     
         <!-- Login Form -->
-        <form action = "../script/connect.php" method = "post">
-          <input type="text" id="pseudo" class="fadeIn second" name="Pseudo" placeholder="Pseudo">
-          <input type="password" id="password" class="fadeIn third" name="password" placeholder="Mot de passe">
+        <form action = "/login" method = "post">
+          <input type="text" id="pseudo" class="fadeIn second" name="pseudo" placeholder="Pseudo" required>
+          <input type="password" id="password" class="fadeIn third" name="password" placeholder="Mot de passe" required>
           <input type="submit" class="fadeIn fourth" value="Connexion">
         </form>
     
         <!-- Forgot password -->
         <div id="formFooter">
           <a class="underlineHover" href="#">Mot de passe oublié ?</a>
-          <a class="underlineHover" href="register.html">Je n'ai pas de compte</a>
-          <a class="underlineHover" href="../index.html">Retour accueil</a>
+          <a class="underlineHover" href="register">Je n'ai pas de compte</a>
+          <a class="underlineHover" href="index">Retour accueil</a>
         </div>
     
       </div>
     </div>
+    {{end}}

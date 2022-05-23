@@ -16,20 +16,21 @@ func Selector() []Utilisateurs {
 		defer db.Close()
 	}
 	var user []Utilisateurs
-	res, err := db.Query("SELECT * FROM utilisateurs")
+	res, err := db.Query("SELECT pseudo, mot_de_passe FROM utilisateurs")
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for res.Next() {
 		var oneUser Utilisateurs
-		err := res.Scan(&oneUser.Id_utilisateurs, &oneUser.Nom, &oneUser.Pseudo, &oneUser.Prenom, &oneUser.Adresse_mail, &oneUser.Mot_de_passe)
+		err := res.Scan(&oneUser.Pseudo, &oneUser.Mot_de_passe)
 
 		if err != nil {
 			log.Fatal(err)
 		}
 		user = append(user, oneUser)
 		/* fmt.Printf("%v\n", u) */
+		
 	}
 	defer res.Close()
 	return user

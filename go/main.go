@@ -10,53 +10,52 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-var temp *template.Template
-
-/* func init() {
-	temp, errT := template.ParseGlob("forum/*.html")
-	if errT != nil {
-		println(errT)
-	}
-} */
-
 func main() {
-	var errT error
-	temp, errT = template.ParseGlob("./*.html")
+	temp, errT := template.ParseGlob("../pages/*.html")
 	if errT != nil {
 		println(errT)
 	}
-	http.HandleFunc("./", index)
-	http.HandleFunc("/process", processor)
-	http.ListenAndServe("localhost:8080", nil)
 
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		temp.ExecuteTemplate(w, "index", nil)
+	})
+
+	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
+		temp.ExecuteTemplate(w, "register", nil)
+	})
+
+	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		temp.ExecuteTemplate(w, "login", nil)
+	})
+
+	http.HandleFunc("/process", processor)
+
+	fs := http.FileServer(http.Dir("assets"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	http.ListenAndServe("localhost:8080", nil)
 }
 
 func processor(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "Post" {
-		http.Redirect(w, r, "/", http.StatusSeeOther)
-		return
-	}
+
 	fpseu := r.FormValue("pseudo")
-	fmail := r.FormValue("mail")
-	fname := r.FormValue("name")
-	fsecname := r.FormValue("secondname")
+	fmail := r.FormValue("adresse_mail")
+	fname := r.FormValue("prenom")
+	fsecname := r.FormValue("nom")
 	fpassword := r.FormValue("password")
 
-	println(fmail)
+	fmt.Println(fpseu, fmail, fname, fsecname, fpassword)
 
-	d := struct {
+	println(fmail, fpseu)
+
+	type UserR struct {
 		pseudo     string
 		mail       string
 		prenom     string
 		secondname string
 		password   string
-	}{
-		pseudo:     fpseu,
-		mail:       fmail,
-		prenom:     fname,
-		secondname: fsecname,
-		password:   fpassword,
 	}
+
+	d := UserR{fpseu, fmail, fname, fsecname, fpassword}
 
 	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/forum")
 
@@ -65,18 +64,18 @@ func processor(w http.ResponseWriter, r *http.Request) {
 		defer db.Close()
 	}
 
-	result, err := db.Exec("INSERT INTO users (pseudo, nom, prenom, adresse_mail, mot_de_passe) VALUES (?, ?, ?, ?, ?, ?, ?)", &d.pseudo, &d.secondname, &d.prenom, &d.mail, &d.password)
+	fmt.Println(d.pseudo, d.secondname, d.prenom, d.mail, d.password)
+
+	result, err := db.Exec("INSERT INTO utilisateurs (pseudo, nom, prenom, adresse_mail, mot_de_passe) VALUES (?,?,?,?,?)", d.pseudo, d.secondname, d.prenom, d.mail, d.password)
 	Selector()
+	fmt.Println("données rentrés")
 	if err != nil {
 		fmt.Errorf("addUser: %v", err)
 	}
 	id, err := result.LastInsertId()
 	if err != nil {
-		fmt.Errorf("addUser: %v", err, id)
+		fmt.Print(id)
 	}
-}
 
-func index(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("fonctionnel")
-	temp.ExecuteTemplate(w, "./register.html", nil)
+	http.Redirect(w, r, "index", 301)
 }
