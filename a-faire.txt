@@ -1,0 +1,12 @@
+inclure topic dans la bdd
+
+back topic
+
+page creation topic 
+
+page inspection topic
+
+
+remplissage bdd avec topic
+
+recup info bdd > page inspection topic

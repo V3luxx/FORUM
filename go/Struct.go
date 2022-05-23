@@ -12,9 +12,6 @@ type Utilisateurs struct {
 type Stock_forum struct {
 	Id_user      int
 	Commentaires string
-	User_level   string
-	Upvotes      int
-	Downvotes    int
 }
 
 type Adresses struct {

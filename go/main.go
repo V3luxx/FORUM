@@ -24,9 +24,17 @@ func main() {
 		temp.ExecuteTemplate(w, "register", nil)
 	})
 
+	http.HandleFunc("/chat", func(w http.ResponseWriter, r *http.Request) {
+		Data := getMessage()
+		temp.ExecuteTemplate(w, "chat", Data)
+	})
+
+	http.HandleFunc("/cha", chater)
+
 	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
 		temp.ExecuteTemplate(w, "login", nil)
 	})
+	http.HandleFunc("/log", login)
 
 	http.HandleFunc("/process", processor)
 
@@ -67,7 +75,6 @@ func processor(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(d.pseudo, d.secondname, d.prenom, d.mail, d.password)
 
 	result, err := db.Exec("INSERT INTO utilisateurs (pseudo, nom, prenom, adresse_mail, mot_de_passe) VALUES (?,?,?,?,?)", d.pseudo, d.secondname, d.prenom, d.mail, d.password)
-	Selector()
 	fmt.Println("données rentrés")
 	if err != nil {
 		fmt.Errorf("addUser: %v", err)
